@@ -62,7 +62,7 @@ RCT_EXPORT_METHOD(saveImage:(NSDictionary *)obj successCallback:(RCTResponseSend
      ];
   } else {
     NSMutableDictionary* details = [NSMutableDictionary dictionary];
-    [details setValue:@"Invalid image Path.  asset not found." forKey:NSLocalizedDescriptionKey];
+    [details setValue:@"Invalid image Path.  Asset not found." forKey:NSLocalizedDescriptionKey];
     errorCallback([NSError errorWithDomain:@"SaveAssetLibrary" code:1 userInfo:details]);
     RCTLogWarn(@"Invalid image Path.  asset not found.");
   }
