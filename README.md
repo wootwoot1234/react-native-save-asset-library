@@ -1,18 +1,18 @@
-# react-native-save-assets-library  [![NPM version](https://img.shields.io/npm/v/react-native-save-assets-library.svg?style=flat-square)](https://www.npmjs.com/package/react-native-save-assets-library)
+# react-native-save-asset-library  [![NPM version](https://img.shields.io/npm/v/react-native-save-asset-library.svg?style=flat-square)](https://www.npmjs.com/package/react-native-save-asset-library)
 
 A React Native module for saving asset-library:// paths to the documents folder
 
 ## Getting started
 
-1. `npm install react-native-save-assets-library --save`
+1. `npm install react-native-save-asset-library --save`
 2. In XCode, in the project navigator, right click `your project` ➜ `Add Files to [your project's name]`
-3. Go to `node_modules` ➜ `react-native-save-assets-library` and add `SaveAssetLibrary.m`
+3. Go to `node_modules` ➜ `react-native-save-asset-library` and add `SaveAssetLibrary.m`
 4. Run your project (`Cmd+R`)
 
 ## Usage
 
 ```javascript
-var SaveAssetLibrary = require('react-native-save-assets-library');
+var SaveAssetLibrary = require('react-native-save-asset-library');
 
 var obj = {
     imagePath: "asset-library://", // (required) Path to asset-library:// for example from CameraRoll
