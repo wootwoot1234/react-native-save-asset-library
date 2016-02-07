@@ -21,7 +21,13 @@ var obj = {
     width: 2048, // (optional) Size of the image to be saved. Default is 2048
     height: 2048, // (optional) Size of the image to be saved. Default is 2048
 };
-SaveAssetLibrary.SaveImage(obj);
+var successCallBack = ()=>{
+    // image has been saved.
+};
+var errorCallback = (error)=>{
+    console.log('error: ', error);
+};
+SaveAssetLibrary.SaveImage(obj, successCallack, errorCallback);
 ```
 
 ## Road Map, Feature Requests & Bug Fixes
@@ -34,7 +40,6 @@ I will add to this module as I need more features and I hope you will too, pull 
 * Support more image types
 * Better image size support.  It would be nice if you would just get the largest possible image
 * Support for PHImageContentModeAspectFill, it currently defaults to (PHImageContentModeAspectFit)[https://developer.apple.com/library/prerelease/ios/documentation/Photos/Reference/PHImageManager_Class/index.html#//apple_ref/c/econst/PHImageContentModeAspectFit]
-* Add success and error callbacks.
 
 ## License
 
