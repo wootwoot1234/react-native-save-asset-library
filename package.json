@@ -1,0 +1,25 @@
+{
+  "name": "react-native-save-assets-library",
+  "version": "1.0.0",
+  "description": "A React Native module for saving asset-library:// paths to the documents folder",
+  "main": "index.ios.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://wootwoot1234@github.com/wootwoot1234/react-native-save-assets-library.git"
+  },
+  "keywords": [
+    "asset-library",
+    "save",
+    "jpg",
+    "png"
+  ],
+  "author": "Tom Krones <you@example.com> (http://yourblog.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wootwoot1234/react-native-save-assets-library/issues"
+  },
+  "homepage": "https://github.com/wootwoot1234/react-native-save-assets-library#readme"
+}
