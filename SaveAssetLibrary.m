@@ -33,9 +33,12 @@ RCT_EXPORT_METHOD(saveImage:(NSDictionary *)obj successCallback:(RCTResponseSend
   if (asset) {
     PHCachingImageManager *imageManager = [[PHCachingImageManager alloc] init];
 
+    PHImageRequestOptions *option = [PHImageRequestOptions new];
+    option.synchronous = YES;
+
     [_successCallbacks setObject:successCallback forKey:imageManager];
     // Request an image for the asset from the PHCachingImageManager.
-    [imageManager requestImageForAsset:asset targetSize:CGSizeMake(width, height) contentMode:PHImageContentModeAspectFit options:nil
+    [imageManager requestImageForAsset:asset targetSize:CGSizeMake(width, height) contentMode:PHImageContentModeAspectFit options:option
                          resultHandler:^(UIImage *image, NSDictionary *info)
      {
        NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
