@@ -64,10 +64,59 @@ RCT_EXPORT_METHOD(saveImage:(NSDictionary *)obj successCallback:(RCTResponseSend
      }
      ];
   } else {
-    NSMutableDictionary* details = [NSMutableDictionary dictionary];
-    [details setValue:@"Invalid image Path.  Asset not found." forKey:NSLocalizedDescriptionKey];
-    errorCallback([NSError errorWithDomain:@"SaveAssetLibrary" code:1 userInfo:details]);
-    RCTLogWarn(@"Invalid image Path.  asset not found.");
+    // Check if the photo is in the photo stream
+    NSString *localIDFragment = [[[[imagePath componentsSeparatedByString: @"="] objectAtIndex: 1] componentsSeparatedByString: @"&"] objectAtIndex: 0];
+    PHFetchResult *fetchResultForPhotostream = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeAlbum subtype:PHAssetCollectionSubtypeAlbumMyPhotoStream options: nil];
+    
+    if (fetchResultForPhotostream.count > 0) {
+      PHAssetCollection *photostream = fetchResultForPhotostream [0];
+      
+      PHFetchOptions *optionsForFetch = [[PHFetchOptions alloc] init];;
+      optionsForFetch.includeHiddenAssets = YES;
+      PHFetchResult *fetchResultForPhotostreamAssets = [PHAsset fetchAssetsInAssetCollection:photostream options:optionsForFetch];
+      
+      if (fetchResultForPhotostreamAssets.count > 0) {
+        NSIndexSet *i = [NSIndexSet indexSetWithIndexesInRange: NSMakeRange(0, fetchResultForPhotostreamAssets.count)];
+        //let i=NSIndexSet(indexesInRange: NSRange(location: 0,length: fetchResultForPhotostreamAssets.count))
+        
+        [_successCallbacks setObject:successCallback forKey:photostream];
+        [fetchResultForPhotostreamAssets enumerateObjectsAtIndexes: i options: NSEnumerationReverse usingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+          PHAsset *target = obj;
+          NSString *identifier = target.localIdentifier;
+          if ([identifier rangeOfString: localIDFragment].length != 0) {
+            if (target) {
+              // get photo info from this asset
+              PHImageRequestOptions * imageRequestOptions = [[PHImageRequestOptions alloc] init];
+              imageRequestOptions.synchronous = YES;
+              [[PHImageManager defaultManager]
+               requestImageDataForAsset:target
+               options:imageRequestOptions
+               resultHandler:^(NSData *imageData, NSString *dataUTI,
+                               UIImageOrientation orientation,
+                               NSDictionary *info)
+               {
+                 if ([info objectForKey:@"PHImageFileURLKey"]) {
+                   
+                   NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+                   NSString * basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
+                   
+                   NSString *imageNameWithExtension = [NSString stringWithFormat:@"%@.%@", imageName, imageType];
+                   [imageData writeToFile:[basePath stringByAppendingPathComponent:imageNameWithExtension] atomically:YES];
+                   // Call the callback
+                   RCTResponseSenderBlock successCallback = [_successCallbacks objectForKey:photostream];
+                   if (successCallback) {
+                     successCallback(@[@"Success"]);
+                     [_successCallbacks removeObjectForKey:photostream];
+                   } else {
+                     RCTLogWarn(@"No callback registered for success");
+                   }
+                 }
+               }];
+            }
+          }
+        }];
+      }
+    }
   }
 }
 
