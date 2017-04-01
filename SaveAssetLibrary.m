@@ -1,7 +1,7 @@
-#import "RCTBridgeModule.h"
+#import <React/RCTBridgeModule.h>
 #import <Photos/Photos.h>
 #import <UIKit/UIKit.h>
-#import "RCTLog.h"
+#import <React/RCTLog.h>
 
 @interface SaveAssetLibrary : NSObject <RCTBridgeModule>
 @end
