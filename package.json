@@ -1,6 +1,6 @@
 {
   "name": "react-native-save-asset-library",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A React Native module for saving asset-library:// paths to the documents folder",
   "main": "index.ios.js",
   "scripts": {
