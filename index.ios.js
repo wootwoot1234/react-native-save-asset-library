@@ -11,7 +11,6 @@ var SaveAssetLibrary = {
             height: 2048,
         }
         var parameters = {...defaults, ...obj};
-        console.log("parameters", parameters);
         NativeSaveAssetLibrary.saveImage(parameters, successCallBack, errorCallback);
     },
 };
