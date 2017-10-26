@@ -56,7 +56,7 @@ RCT_EXPORT_METHOD(saveImage:(NSDictionary *)obj successCallback:(RCTResponseSend
        // Call the callback
        RCTResponseSenderBlock successCallback = [_successCallbacks objectForKey:imageManager];
        if (successCallback) {
-         successCallback(@[@"Success"]);
+         successCallback(@[[basePath stringByAppendingPathComponent:imageNameWithExtension]]);
          [_successCallbacks removeObjectForKey:imageManager];
        } else {
          RCTLogWarn(@"No callback registered for success");
@@ -105,8 +105,8 @@ RCT_EXPORT_METHOD(saveImage:(NSDictionary *)obj successCallback:(RCTResponseSend
                    // Call the callback
                    RCTResponseSenderBlock successCallback = [_successCallbacks objectForKey:photostream];
                    if (successCallback) {
-                     successCallback(@[@"Success"]);
-                     [_successCallbacks removeObjectForKey:photostream];
+                       successCallback(@[[basePath stringByAppendingPathComponent:imageNameWithExtension]]);
+                       [_successCallbacks removeObjectForKey:photostream];
                    } else {
                      RCTLogWarn(@"No callback registered for success");
                    }
