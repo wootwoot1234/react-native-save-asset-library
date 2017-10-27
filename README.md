@@ -29,6 +29,11 @@ var errorCallback = (error)=>{
 };
 SaveAssetLibrary.SaveImage(obj, successCallack, errorCallback);
 ```
+###  Change code in SaveAssetLibrary.m For Get Url on success callback:
+
+please replace successCallback function code line no(59,108)
+         successCallback(@[[basePath stringByAppendingPathComponent:imageNameWithExtension]]);
+now you can get image url on success callback
 
 ## Road Map, Feature Requests & Bug Fixes
 
