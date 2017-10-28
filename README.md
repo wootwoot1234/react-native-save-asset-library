@@ -21,15 +21,15 @@ var obj = {
     width: 2048, // (optional) Size of the image to be saved. Default is 2048
     height: 2048, // (optional) Size of the image to be saved. Default is 2048
 };
-var successCallBack = ()=>{
+var successCallBack = (imagePath)=>{
     // image has been saved.
+    console.log('Path: ' + imagePath);
 };
 var errorCallback = (error)=>{
     console.log('error: ', error);
 };
 SaveAssetLibrary.SaveImage(obj, successCallack, errorCallback);
 ```
-
 ## Road Map, Feature Requests & Bug Fixes
 
 I will add to this module as I need more features and I hope you will too, pull requests are always welcome.  I will not add features on request because I'm busy with other projects.  I want this to be a community written module so if there is a feature that's missing or bug, add it or fix it and send me a pull request.  If you don't know Objective C you can learn it.  We all were where you are now at some point.  [StackOverflow.com](http://stackoverflow.com/) is your friend.  :)
